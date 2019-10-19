@@ -36,5 +36,32 @@ router.post('/', async (req, res) => {
         .status(201)
         .json()
 })
+//PATCH
+router.patch('/:id', async (req, res) => {
+    const {id} = req.params
+    const body = req.body   
+    //TODO: add validations
+    isValidId(res,id);
+    const student = await Student.findByIdAndUpdate(id, {
+        $set: {...body}
+    }, {new:true}).exec()
+
+    if(!student){
+        return res.status(404).json()
+    }
+    return res
+        .status(200)
+        .json(student)
+})
+
+//DELETE
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+    isValidId(res,id);
+    await Student.findOneAndDelete(id).exec()
+    return res
+    .status(200)
+    .json()
+})
 
 export default router;

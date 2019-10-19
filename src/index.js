@@ -3,8 +3,9 @@ import "dotenv/config";
 import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors'
-
+import AuthMiddleware from './middleware/auth.middleware';
 import StudentRoute from './routes/Student.route'
+import AuthRoute from './routes/Auth.route'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -12,9 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
     origin:'*',
-  }))
+  }));
 
-app.use('/student',StudentRoute);
+app.use('/auth',AuthRoute);
+app.use('/student',AuthMiddleware,StudentRoute);
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
