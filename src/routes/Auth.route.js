@@ -10,7 +10,6 @@ router.post('/login', async (req, res) => {
   const { correo, contrasenia } = req.body;
 
   const user = await Student.findOne({ correo }).exec();
-  console.log(user,process.env.JWT_SECRET)
   if (!user) {
     return res.status(401).json({
       message: "UNAUTHORIZED",

@@ -16,7 +16,7 @@ app.use(cors({
   }));
 
 app.use('/auth',AuthRoute);
-app.use('/student',StudentRoute);
+app.use('/student',AuthMiddleware,StudentRoute);
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
