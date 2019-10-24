@@ -32,7 +32,7 @@ router.post('/login', async (req, res) => {
   });
 });
 
-router.get('/varify',async(req,res)=>{
+router.get('/check',async(req,res)=>{
     const {authorization}= req.headers;
     var decoded = jwt.decode(authorization, {complete: true});
     const {correo}=decoded.payload;
