@@ -6,6 +6,7 @@ import cors from 'cors'
 import AuthMiddleware from './middleware/auth.middleware';
 import StudentRoute from './routes/Student.route'
 import AuthRoute from './routes/Auth.route'
+import CommentsRoute from './routes/Comments.route'
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -17,6 +18,8 @@ app.use(cors({
 
 app.use('/auth',AuthRoute);
 app.use('/student',AuthMiddleware,StudentRoute);
+app.use('/comments',CommentsRoute);
+
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true
